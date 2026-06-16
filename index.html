@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akses 500 Ribu+ File Video</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-main: #f5f5f5;
+            --text-muted: #a3a3a3;
+            --accent-red: #ef4444;
+            --btn-blue: #2563eb;
+            --btn-hover: #1d4ed8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            max-width: 480px;
+            width: 100%;
+            padding: 32px 24px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: 1px solid #2a2a2a;
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        p.subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .features-box {
+            background: #171717;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .features-box ul {
+            list-style-position: inside;
+            list-style-type: auto;
+        }
+
+        .features-box li {
+            font-size: 0.95rem;
+            color: #e5e7eb;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .features-box li:last-child {
+            margin-bottom: 0;
+        }
+
+        .pricing-box {
+            background: #171717;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .price-normal {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .price-promo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .fomo-text {
+            color: var(--accent-red);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .countdown {
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: var(--btn-blue);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--btn-hover);
+        }
+
+        .emoji {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Dapatkan akses total 500 ribuan files video berasal dari film, drama, serial tv dll. <span class="emoji">🎬</span></h1>
+        <p class="subtitle">Bisa untuk bahan konten dan bahan gabut. <span class="emoji">🍿</span></p>
+
+        <div class="features-box">
+            <ul>
+                <li>Total all files 1,2 Petabytes (1.200 TB)</li>
+                <li>File type: mp4 dan mkv</li>
+                <li>Direct download speed ngebut</li>
+                <li>Server private non cloud</li>
+            </ul>
+        </div>
+
+        <div class="pricing-box">
+            <span class="price-normal" id="normal-price">Rp 98.000</span>
+            <div class="price-promo" id="current-price">Rp 20.000</div>
+            
+            <div class="fomo-text" id="fomo-message">
+                Harga naik dalam:
+                <span class="countdown" id="timer">30:00</span>
+            </div>
+        </div>
+
+        <a href="http://lynk.id/msipayment/v7r68j7vv20k/checkout" class="btn" id="cta-btn">Ambil Promo Sekarang</a>
+    </div>
+
+    <script>
+        let timeInSeconds = 30 * 60;
+        
+        const timerElement = document.getElementById('timer');
+        const normalPriceElement = document.getElementById('normal-price');
+        const currentPriceElement = document.getElementById('current-price');
+        const fomoMessageElement = document.getElementById('fomo-message');
+        const btnElement = document.getElementById('cta-btn');
+
+        const countdownInterval = setInterval(() => {
+            const minutes = Math.floor(timeInSeconds / 60);
+            let seconds = timeInSeconds % 60;
+
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            timerElement.textContent = `${minutes}:${seconds}`;
+
+            if (timeInSeconds > 0) {
+                timeInSeconds--;
+            } else {
+                clearInterval(countdownInterval);
+                normalPriceElement.style.display = 'none';
+                currentPriceElement.textContent = 'Rp 98.000';
+                fomoMessageElement.textContent = 'Promo telah berakhir.';
+                fomoMessageElement.style.color = '#a3a3a3';
+                btnElement.textContent = 'Beli Sekarang - Rp 98.000';
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
