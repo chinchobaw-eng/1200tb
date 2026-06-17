@@ -11,8 +11,8 @@
             --text-main: #f5f5f5;
             --text-muted: #a3a3a3;
             --accent-red: #ef4444;
-            --btn-blue: #2563eb;
-            --btn-hover: #1d4ed8;
+            --btn-orange: #f97316; /* Warna oranye untuk CTA */
+            --btn-hover: #ea580c;  /* Warna oranye gelap saat di-hover */
         }
 
         * {
@@ -29,7 +29,8 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 20px;
+            /* Tambahan padding bawah agar konten tidak tertutup tombol floating */
+            padding: 20px 20px 100px 20px; 
         }
 
         .container {
@@ -41,6 +42,7 @@
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             border: 1px solid #2a2a2a;
+            position: relative;
         }
 
         h1 {
@@ -89,7 +91,7 @@
             border: 1px solid #333;
             border-radius: 8px;
             padding: 20px;
-            margin-bottom: 24px;
+            margin-bottom: 8px; /* Disesuaikan karena ada tombol floating */
         }
 
         .price-normal {
@@ -121,21 +123,52 @@
             margin-top: 4px;
         }
 
+        /* Styling untuk teks FOMO tambahan */
+        .fomo-extra {
+            color: #fbbf24; /* Warna kuning/amber agar menonjol tapi tetap elegan */
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #444;
+        }
+
+        /* Wrapper untuk tombol CTA Floating */
+        .floating-cta-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px; /* Mengikuti max-width container */
+            /* Menggunakan safe-area-inset untuk menghindari tombol navigasi bawaan HP */
+            padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 12px));
+            /* Efek gradient gelap agar teks di belakang tombol masih terlihat samar dan tidak terpotong kaku */
+            background: linear-gradient(to top, rgba(18,18,18,1) 70%, rgba(18,18,18,0));
+            z-index: 100;
+        }
+
         .btn {
             display: block;
             width: 100%;
-            background-color: var(--btn-blue);
+            background-color: var(--btn-orange);
             color: #ffffff;
             text-decoration: none;
             padding: 16px;
             border-radius: 8px;
             font-size: 1.1rem;
             font-weight: 600;
-            transition: background-color 0.2s ease;
+            text-align: center;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3); /* Bayangan oranye */
         }
 
         .btn:hover {
             background-color: var(--btn-hover);
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .emoji {
@@ -156,6 +189,7 @@
                 <li>Direct download speed ngebut</li>
                 <li>Server private non cloud</li>
                 <li>Bayar sekali saja, akses selamanya</li>
+                <li>Ga perlu konfirmasi, langsung dapat akses</li>
             </ul>
         </div>
 
@@ -167,8 +201,12 @@
                 Harga naik dalam:
                 <span class="countdown" id="timer">30:00</span>
             </div>
+            
+            <div class="fomo-extra" id="fomo-extra-text">Khusus 10 orang pembeli hari ini</div>
         </div>
+    </div>
 
+    <div class="floating-cta-wrapper">
         <a href="http://lynk.id/msipayment/v7r68j7vv20k/checkout" class="btn" id="cta-btn">Ambil Promo Sekarang</a>
     </div>
 
@@ -179,6 +217,7 @@
         const normalPriceElement = document.getElementById('normal-price');
         const currentPriceElement = document.getElementById('current-price');
         const fomoMessageElement = document.getElementById('fomo-message');
+        const fomoExtraTextElement = document.getElementById('fomo-extra-text');
         const btnElement = document.getElementById('cta-btn');
 
         const countdownInterval = setInterval(() => {
@@ -195,8 +234,15 @@
                 clearInterval(countdownInterval);
                 normalPriceElement.style.display = 'none';
                 currentPriceElement.textContent = 'Rp 98.000';
+                
                 fomoMessageElement.textContent = 'Promo telah berakhir.';
                 fomoMessageElement.style.color = '#a3a3a3';
+                
+                // Sembunyikan teks 10 orang setelah promo habis
+                if (fomoExtraTextElement) {
+                    fomoExtraTextElement.style.display = 'none';
+                }
+                
                 btnElement.textContent = 'Beli Sekarang - Rp 98.000';
             }
         }, 1000);
