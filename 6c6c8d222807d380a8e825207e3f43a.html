@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terima Kasih - Akses Server</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-main: #f5f5f5;
+            --text-muted: #a3a3a3;
+            --accent-red: #ef4444;
+            --accent-amber: #fbbf24;
+            --btn-orange: #f97316;
+            --btn-hover: #ea580c;
+            --box-bg: #171717;
+            --border-color: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px 20px;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            max-width: 480px;
+            width: 100%;
+            padding: 36px 24px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: 1px solid #2a2a2a;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #ffffff;
+        }
+
+        /* --- Box Akses Server --- */
+        .server-box {
+            background-color: var(--box-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s ease;
+        }
+
+        .server-box:hover {
+            border-color: #444;
+        }
+
+        .server-btn {
+            display: block;
+            width: 100%;
+            background-color: #22c55e; /* Warna hijau sukses profesional */
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 6px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .server-btn:hover {
+            background-color: #16a34a;
+        }
+
+        /* --- Warning Text --- */
+        .warning-text {
+            color: var(--accent-red);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 28px;
+        }
+
+        /* --- Divider Line --- */
+        .divider {
+            border: 0;
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 28px 0;
+        }
+
+        /* --- Teks Headline Upsell --- */
+        .upsell-headline {
+            color: var(--accent-amber);
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            animation: pulse-text 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        /* --- Box Penawaran Upsell --- */
+        .upsell-box {
+            background-color: var(--box-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .upsell-text {
+            font-size: 0.95rem;
+            color: #e5e7eb;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .price-discount {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .price-actual {
+            color: #ffffff;
+            font-weight: 700;
+            border-bottom: 1px dashed var(--accent-amber);
+            padding-bottom: 1px;
+        }
+
+        .upsell-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--btn-orange);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: center;
+            transition: background-color 0.2s ease;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+        }
+
+        .upsell-btn:hover {
+            background-color: var(--btn-hover);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Terima kasih! 🎉</h1>
+
+        <div class="server-box">
+            <a href="https://bit.ly/server-index" target="_blank" class="server-btn">Klik di sini untuk mengakses servernya</a>
+        </div>
+        
+        <p class="warning-text">Jangan bagikan link ini ke siapapun!</p>
+
+        <hr class="divider">
+
+        <h2 class="upsell-headline">Hey tunggu dulu ✋</h2>
+        
+        <div class="upsell-box">
+            <p class="upsell-text">
+                Mau hiburan lebih seru? Nonton ratusan channel TV + sports cuma seharga <span class="price-actual">47.950</span> per bulan, <span class="price-discount">69.000</span>
+            </p>
+            <a href="https://premium.ktv.my.id/" class="upsell-btn">Khusus untukmu klik di sini</a>
+        </div>
+    </div>
+
+</body>
+</html>
