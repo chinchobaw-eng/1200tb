@@ -70,7 +70,7 @@
         .server-btn {
             display: block;
             width: 100%;
-            background-color: #22c55e; /* Warna hijau sukses profesional */
+            background-color: #22c55e;
             color: #ffffff;
             text-decoration: none;
             padding: 16px;
@@ -145,6 +145,18 @@
             padding-bottom: 1px;
         }
 
+        /* Styling Khusus Countdown Upsell */
+        .upsell-countdown {
+            color: var(--accent-red);
+            font-weight: 700;
+            background-color: rgba(239, 68, 68, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-variant-numeric: tabular-nums;
+            display: inline-block;
+            margin-left: 2px;
+        }
+
         .upsell-btn {
             display: block;
             width: 100%;
@@ -181,12 +193,44 @@
         <h2 class="upsell-headline">Hey tunggu dulu ✋</h2>
         
         <div class="upsell-box">
-            <p class="upsell-text">
-                Mau hiburan lebih seru? Nonton ratusan channel TV + sports cuma seharga <span class="price-discount">69.000</span> <span class="price-actual">47.950</span> per bulan.
+            <p class="upsell-text" id="upsell-paragraph">
+                Mau hiburan lebih seru? Nonton ratusan channel TV + sports cuma seharga <span class="price-discount">69.000</span> <span class="price-actual">47.950</span> per bulan. Promo ini valid selama <span class="upsell-countdown" id="upsell-timer">07:00</span>
             </p>
-            <a href="https://premium.ktv.my.id/" class="upsell-btn">Khusus untukmu klik di sini</a>
+            <a href="https://premium.ktv.my.id/" class="upsell-btn" id="upsell-cta">Khusus untukmu klik di sini</a>
         </div>
     </div>
+
+    <script>
+        // Set waktu countdown: 7 menit (7 * 60 detik)
+        let upsellTime = 7 * 60;
+        
+        const upsellTimerElement = document.getElementById('upsell-timer');
+        const upsellParagraphElement = document.getElementById('upsell-paragraph');
+        const upsellCtaElement = document.getElementById('upsell-cta');
+
+        const upsellCountdownInterval = setInterval(() => {
+            const minutes = Math.floor(upsellTime / 60);
+            let seconds = upsellTime % 60;
+
+            // Format angka agar selalu dua digit (misal: 05)
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            upsellTimerElement.textContent = `0${minutes}:${seconds}`;
+
+            if (upsellTime > 0) {
+                upsellTime--;
+            } else {
+                // Ketika waktu 7 menit habis otomatis mengeksekusi ini:
+                clearInterval(upsellCountdownInterval);
+                
+                // Mengubah teks info promo menjadi hangus
+                upsellParagraphElement.innerHTML = 'Mau hiburan lebih seru? Nonton ratusan channel TV + sports dengan harga normal <span class="price-actual">69.000</span> per bulan. <span style="color: #ef4444; font-weight: 600; display: block; margin-top: 8px;">Waktu promo 7 menit Anda telah berakhir!</span>';
+                
+                // Menyesuaikan tombol CTA setelah promo habis
+                upsellCtaElement.textContent = 'Dapatkan Akses Sekarang';
+            }
+        }, 1000);
+    </script>
 
 </body>
 </html>
