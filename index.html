@@ -278,6 +278,24 @@
             }
         }, 1000);
     </script>
+<script>
+    let originalTitle = document.title;
+    let alertInterval;
 
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            // Ketika user meninggalkan tab, judul akan berkedip setiap 1 detik
+            alertInterval = setInterval(() => {
+                document.title = document.title === originalTitle 
+                    ? "⚠️ PROMO MAU HABIS!" 
+                    : "😱 Slot 10 Orang Terakhir!";
+            }, 1000);
+        } else {
+            // Ketika user kembali ke tab Anda, judul kembali normal
+            clearInterval(alertInterval);
+            document.title = originalTitle;
+        }
+    });
+</script>
 </body>
 </html>
