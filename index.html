@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akses 500 Ribu+ File Video</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --bg-color: #121212;
@@ -22,7 +27,8 @@
         }
 
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            /* Menggunakan Inter untuk font dasar/paragraf agar mudah dibaca */
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             display: flex;
@@ -45,9 +51,11 @@
         }
 
         h1 {
-            font-size: 1.25rem;
-            line-height: 1.5;
-            font-weight: 500;
+            /* Menggunakan Space Grotesk untuk Headline */
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35rem;
+            line-height: 1.4;
+            font-weight: 700;
             margin-bottom: 12px;
             color: #ffffff;
         }
@@ -102,7 +110,9 @@
         }
 
         .price-promo {
-            font-size: 2rem;
+            /* Menggunakan Space Grotesk untuk Harga Promo */
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 12px;
@@ -115,7 +125,9 @@
         }
 
         .countdown {
-            font-size: 1.25rem;
+            /* Menggunakan Space Grotesk untuk Timer */
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
             font-weight: 700;
             font-variant-numeric: tabular-nums;
             display: block;
@@ -148,14 +160,14 @@
         .glowing-wrapper {
             position: relative;
             overflow: hidden;
-            border-radius: 10px; /* Sedikit lebih besar dari border-radius tombol */
-            padding: 3px; /* Ketebalan garis kilauan outline */
+            border-radius: 10px;
+            padding: 3px;
             box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
             transition: transform 0.1s ease;
         }
 
         .glowing-wrapper:active {
-            transform: scale(0.98); /* Efek mengecil saat ditekan */
+            transform: scale(0.98); 
         }
 
         .glowing-wrapper::before {
@@ -166,9 +178,8 @@
             width: 150vw; 
             height: 150vw;
             transform: translate(-50%, -50%) rotate(0deg);
-            /* Gradien cahaya: Bening -> Bening -> Putih transparan -> Putih cerah */
             background: conic-gradient(from 0deg, transparent 70%, rgba(255, 255, 255, 0.3) 85%, #ffffff 100%);
-            animation: rotate-glow 2s linear infinite; /* Kecepatan putaran */
+            animation: rotate-glow 2s linear infinite; 
             z-index: -1;
         }
 
@@ -179,19 +190,21 @@
 
         /* --- Tombol Utama --- */
         .btn {
+            /* Menggunakan Space Grotesk untuk Teks Tombol */
+            font-family: 'Space Grotesk', sans-serif;
             display: block;
             width: 100%;
             background-color: var(--btn-orange);
             color: #ffffff;
             text-decoration: none;
             padding: 16px;
-            border-radius: 8px; /* Mengikuti lengkungan dalam wrapper */
+            border-radius: 8px; 
             font-size: 1.15rem;
             font-weight: 700;
             text-align: center;
             transition: background-color 0.2s ease;
             position: relative;
-            z-index: 1; /* Supaya warna solid menutupi bagian tengah gradien */
+            z-index: 1; 
         }
 
         .btn:hover {
@@ -203,7 +216,6 @@
         }
     </style>
 <script async data-id="101507760" src="//static.getclicky.com/js"></script>
-<!-- 100% privacy-first analytics -->
 <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </head>
 <body>
@@ -276,7 +288,6 @@
                     fomoExtraTextElement.style.display = 'none';
                 }
                 
-                // Hapus animasi jika mau saat promo habis (opsional, saat ini saya biarkan teksnya saja yang berubah)
                 btnElement.textContent = 'Beli Sekarang - Rp 40.000';
             }
         }, 1000);
@@ -287,14 +298,12 @@
 
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
-            // Ketika user meninggalkan tab, judul akan berkedip setiap 1 detik
             alertInterval = setInterval(() => {
                 document.title = document.title === originalTitle 
                     ? "⚠️ PROMO MAU HABIS!" 
                     : "⚠️ Slot 7 Orang Terakhir!";
             }, 1000);
         } else {
-            // Ketika user kembali ke tab Anda, judul kembali normal
             clearInterval(alertInterval);
             document.title = originalTitle;
         }
