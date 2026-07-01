@@ -69,6 +69,7 @@
             color: var(--text-muted);
             line-height: 1.5;
             margin-bottom: 24px;
+            text-align: justify; 
         }
 
         .features-box {
@@ -143,6 +144,7 @@
             margin-top: 12px;
             padding-top: 12px;
             border-top: 1px dashed #444;
+            text-align: justify; 
         }
 
         /* --- Style Gambar VIP Pass --- */
@@ -154,6 +156,15 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        /* --- Style Angka Slot --- */
+        .slot-number {
+            color: var(--accent-red);
+            font-size: 1.3em;
+            font-weight: 700;
+            display: inline-block;
+            transition: transform 0.3s ease;
         }
 
         /* --- Area Floating CTA --- */
@@ -258,7 +269,11 @@
                 <span class="countdown" id="timer">30:00</span>
             </div>
             
-            <div class="fomo-extra promo-element">Khusus 10 orang pembeli hari ini.</div>
+            <!-- UPDATE BAGIAN TEKS FOMO DISINI -->
+            <div class="fomo-extra promo-element" style="text-align: center;">
+                Khusus 10 orang pembeli hari ini.<br>
+                Slot tersedia: <span class="slot-number" id="live-slot">7</span>
+            </div>
             
             <img src="vip pass.png" alt="VIP Pass Promo" class="vip-image promo-element">
             
@@ -273,6 +288,7 @@
     </div>
 
     <script>
+        // --- Script Timer Countdown Utama ---
         let timeInSeconds = 17 * 60;
         
         const timerElement = document.getElementById('timer');
@@ -280,7 +296,6 @@
         const currentPriceElement = document.getElementById('current-price');
         const fomoMessageElement = document.getElementById('fomo-message');
         const btnElement = document.getElementById('cta-btn');
-        // Mengambil semua elemen yang berhubungan dengan promo (teks ekstra & gambar)
         const promoElements = document.querySelectorAll('.promo-element');
 
         const countdownInterval = setInterval(() => {
@@ -301,7 +316,6 @@
                 fomoMessageElement.textContent = 'Promo telah berakhir.';
                 fomoMessageElement.style.color = '#a3a3a3';
                 
-                // Menyembunyikan teks FOMO ekstra dan gambar VIP
                 promoElements.forEach(el => {
                     el.style.display = 'none';
                 });
@@ -309,6 +323,31 @@
                 btnElement.textContent = 'Beli Sekarang - Rp 40.000';
             }
         }, 1000);
+
+        // --- Script FOMO Sisa Slot ---
+        let currentSlots = 7; // Dimulai dari angka 7 agar terasa sudah ada yang beli
+        const slotElement = document.getElementById('live-slot');
+        
+        function reduceSlots() {
+            // Berhenti di angka 2 agar pengunjung tidak merasa sudah sepenuhnya kehabisan slot
+            if (currentSlots > 2) { 
+                currentSlots--;
+                slotElement.textContent = currentSlots;
+                
+                // Efek denyut saat angka berubah
+                slotElement.style.transform = 'scale(1.5)';
+                setTimeout(() => {
+                    slotElement.style.transform = 'scale(1)';
+                }, 300);
+                
+                // Set waktu acak untuk penurunan berikutnya (antara 2 hingga 4 menit)
+                const nextDropTime = Math.floor(Math.random() * (240000 - 120000 + 1)) + 120000;
+                setTimeout(reduceSlots, nextDropTime);
+            }
+        }
+        
+        // Memicu penurunan slot pertama dalam waktu 15 - 30 detik setelah user membuka web
+        setTimeout(reduceSlots, Math.floor(Math.random() * 15000) + 15000);
     </script>
 <script>
     let originalTitle = document.title;
@@ -319,7 +358,7 @@
             alertInterval = setInterval(() => {
                 document.title = document.title === originalTitle 
                     ? "⚠️ PROMO MAU HABIS!" 
-                    : "⚠️ Slot 7 Orang Terakhir!";
+                    : "⚠️ Slot Terakhir!";
             }, 1000);
         } else {
             clearInterval(alertInterval);
