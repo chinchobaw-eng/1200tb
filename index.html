@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akses 500 Ribu+ File Video</title>
     
+    <!-- Import Google Fonts: Space Grotesk & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -12,7 +13,7 @@
     <style>
         /* --- KUNCI UNTUK MENGECILKAN SEMUA TEKS --- */
         html {
-            font-size: 14px; /* Mengubah ukuran dasar dari 16px menjadi 14px */
+            font-size: 14px; 
         }
 
         :root {
@@ -56,7 +57,7 @@
 
         h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.4rem; /* Sedikit disesuaikan agar tetap proporsional dengan base 14px */
+            font-size: 1.4rem; 
             line-height: 1.4;
             font-weight: 700;
             margin-bottom: 12px;
@@ -144,6 +145,17 @@
             border-top: 1px dashed #444;
         }
 
+        /* --- Style Gambar VIP Pass --- */
+        .vip-image {
+            max-width: 100%; 
+            height: auto;    
+            margin-top: 16px; 
+            margin-bottom: 8px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         /* --- Area Floating CTA --- */
         .floating-cta-wrapper {
             position: fixed;
@@ -216,6 +228,7 @@
         }
     </style>
 <script async data-id="101507760" src="//static.getclicky.com/js"></script>
+<!-- 100% privacy-first analytics -->
 <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </head>
 <body>
@@ -245,8 +258,11 @@
                 <span class="countdown" id="timer">30:00</span>
             </div>
             
-            <div class="fomo-extra" id="fomo-extra-text">Khusus 10 orang pembeli hari ini.</div>
-            <div class="fomo-extra" id="fomo-extra-text">Agar server tetap ngebut, jumlah user akan dibatasi. Jika user sudah penuh penawaran ini akan ditutup!</div>
+            <div class="fomo-extra promo-element">Khusus 10 orang pembeli hari ini.</div>
+            
+            <img src="vip pass.png" alt="VIP Pass Promo" class="vip-image promo-element">
+            
+            <div class="fomo-extra promo-element">Agar server tetap ngebut, jumlah user akan dibatasi. Jika user sudah penuh penawaran ini akan ditutup!</div>
         </div>
     </div>
 
@@ -263,8 +279,9 @@
         const normalPriceElement = document.getElementById('normal-price');
         const currentPriceElement = document.getElementById('current-price');
         const fomoMessageElement = document.getElementById('fomo-message');
-        const fomoExtraTextElement = document.getElementById('fomo-extra-text');
         const btnElement = document.getElementById('cta-btn');
+        // Mengambil semua elemen yang berhubungan dengan promo (teks ekstra & gambar)
+        const promoElements = document.querySelectorAll('.promo-element');
 
         const countdownInterval = setInterval(() => {
             const minutes = Math.floor(timeInSeconds / 60);
@@ -284,9 +301,10 @@
                 fomoMessageElement.textContent = 'Promo telah berakhir.';
                 fomoMessageElement.style.color = '#a3a3a3';
                 
-                if (fomoExtraTextElement) {
-                    fomoExtraTextElement.style.display = 'none';
-                }
+                // Menyembunyikan teks FOMO ekstra dan gambar VIP
+                promoElements.forEach(el => {
+                    el.style.display = 'none';
+                });
                 
                 btnElement.textContent = 'Beli Sekarang - Rp 40.000';
             }
